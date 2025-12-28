@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EarnPro - Premium Earning Platform</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .navbar { background: rgba(255,255,255,0.95); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .hero { background: url('https://source.unsplash.com/random/1600x900/?money,earn') no-repeat center center/cover; color: white; padding: 150px 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.7); }
+        .feature-card { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .feature-card:hover { transform: translateY(-10px); }
+        .testimonial { background: #f8f9fa; }
+        footer { background: #343a40; color: white; }
+        .btn-primary { background: #667eea; border: none; }
+        .btn-primary:hover { background: #764ba2; }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary" href="#">EarnPro</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#how">Kaise Kamaye</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary text-white px-4 mx-2" href="#register">Register</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-outline-primary px-4" href="#login">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold">Ghar Baithe Paise Kamaye!</h1>
+            <p class="lead fs-3">EarnPro ke saath daily tasks, surveys, referrals se unlimited earning karo. Premium platform jo sach mein pay karta hai.</p>
+            <a href="#register" class="btn btn-primary btn-lg px-5 py-3 mt-4">Abhi Join Karein</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold text-white">Hamare Premium Features</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card p-5 text-center">
+                        <i class="fas fa-tasks fa-4x text-primary mb-4"></i>
+                        <h4>Daily Tasks & Surveys</h4>
+                        <p>Simple tasks complete karke rozana ₹500+ kamaye.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card p-5 text-center">
+                        <i class="fas fa-users fa-4x text-primary mb-4"></i>
+                        <h4>Referral Program</h4>
+                        <p>Doston ko invite karke lifetime commission earn karo.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card p-5 text-center">
+                        <i class="fas fa-wallet fa-4x text-primary mb-4"></i>
+                        <h4>Instant Withdrawal</h4>
+                        <p>Paytm, UPI, Bank - Minimum ₹100 se withdrawal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">Kaise Kaam Karta Hai?</h2>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+                    <h5>1. Register Karein</h5>
+                    <p>Free account banayein.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-check-circle fa-3x text-primary mb-3"></i>
+                    <h5>2. Tasks Complete Karein</h5>
+                    <p>Surveys, apps download, etc.</p>
+                </div>
+                <div class="col-md-4">
+                    <i class="fas fa-rupee-sign fa-3x text-primary mb-3"></i>
+                    <h5>3. Paise Withdraw Karein</h5>
+                    <p>Instant payment lein.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-5 testimonial">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">Users Kya Kehte Hain</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card p-4">
+                        <p>"Is website se maine mahine mein ₹15,000 kamaye! Best earning site."</p>
+                        <strong>- Rajesh, Mumbai</strong>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-4">
+                        <p>"Referral se passive income aa raha hai. Highly recommended!"</p>
+                        <strong>- Priya, Delhi</strong>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-4">
+                        <p>"Withdrawal instant hai, no scam."</p>
+                        <strong>- Amit, Bangalore</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Register -->
+    <section id="register" class="py-5 text-center text-white">
+        <div class="container">
+            <h2 class="fw-bold">Aaj Hi Shuru Karein!</h2>
+            <p class="lead">Free register karke bonus paayein.</p>
+            <a href="#" class="btn btn-light btn-lg px-5 py-3">Register Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4">
+        <div class="container text-center">
+            <p>&copy; 2025 EarnPro. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
