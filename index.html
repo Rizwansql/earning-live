@@ -3,73 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>आसमान से लूडो की बारिश (Pure HTML) 😂</title>
+    <title>पानी की हल्की बारिश + बर्फ, उल्टी दिशा में! ❄️🌧️😂</title>
     <style>
         body {
             margin: 0;
+            padding: 0;
             height: 100vh;
             background: linear-gradient(to bottom, #87CEEB, #E0F7FA);
             overflow: hidden;
-            text-align: center;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            position: relative;
         }
+
         h1 {
+            text-align: center;
             padding: 20px;
             font-size: 2.5em;
             color: #333;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            margin: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .drop {
+            position: absolute;
+            animation: rise linear infinite;
+            pointer-events: none;
+            user-select: none;
+            bottom: -100px;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            100% {
+                transform: translateY(-120vh) rotate(720deg);
+                opacity: 0.4;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>आसमान से लूडो की बारिश हो रही है! 😂🎲🌧️</h1>
+    <h1>पानी की हल्की बारिश + बर्फ उल्टी दिशा में! ❄️🌧️🎲</h1>
 
-    <!-- लूडो डाइस 1 -->
-    <svg width="80" height="80" class="dice">
-        <rect x="10" y="10" width="60" height="60" rx="15" fill="#fff" stroke="#000" stroke-width="4"/>
-        <circle cx="25" cy="25" r="8" fill="#000"/>
-        <circle cx="55" cy="25" r="8" fill="#000"/>
-        <circle cx="40" cy="40" r="8" fill="#000"/>
-        <circle cx="25" cy="55" r="8" fill="#000"/>
-        <circle cx="55" cy="55" r="8" fill="#000"/>
-        <animateTransform attributeName="transform" type="translate" from="0,-100" to="0,1000" dur="6s" repeatCount="indefinite"/>
-        <animate attributeName="opacity" values="1;0.8;1" dur="6s" repeatCount="indefinite"/>
-    </svg>
+    <script>
+        // पानी की बूंदें, बर्फ, और थोड़े लूडो पासे
+        const items = [
+            '💧', '💧', '💧', '💧', '💧', // पानी की बूंदें ज्यादा
+            '❄️', '❄️', '❄️', '❄️',       // बर्फ
+            '🌨️', '🌨️',                   // स्नो क्लाउड
+            '🎲', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'  // लूडो पासे कम
+        ];
 
-    <!-- लूडो डाइस 2 -->
-    <svg width="70" height="70" class="dice" style="left: 15%;">
-        <rect x="10" y="10" width="50" height="50" rx="10" fill="#ff4444" stroke="#000" stroke-width="3"/>
-        <circle cx="30" cy="30" r="10" fill="#fff"/>
-        <animateTransform attributeName="transform" type="translate" from="0,-150" to="0,1000" dur="8s" repeatCount="indefinite"/>
-    </svg>
+        function createDrop() {
+            const drop = document.createElement('div');
+            drop.classList.add('drop');
+            drop.innerText = items[Math.floor(Math.random() * items.length)];
 
-    <!-- और कई सारे डाइस (कॉपी-पेस्ट करके और जोड़ सकते हो) -->
-    <svg width="90" height="90" class="dice" style="left: 30%;">
-        <rect x="10" y="10" width="70" height="70" rx="15" fill="#44ff44"/>
-        <circle cx="40" cy="40" r="12" fill="#000"/>
-        <circle cx="20" cy="20" r="8" fill="#000"/>
-        <circle cx="60" cy="60" r="8" fill="#000"/>
-        <animateTransform attributeName="transform" type="translate" from="0,-80" to="0,1100" dur="5s" repeatCount="indefinite"/>
-    </svg>
+            // रैंडम पोजीशन
+            drop.style.left = Math.random() * 100 + 'vw';
 
-    <svg width="60" height="60" class="dice" style="left: 50%;">
-        <rect x="5" y="5" width="50" height="50" rx="12" fill="#4444ff"/>
-        <circle cx="30" cy="30" r="10" fill="#fff"/>
-        <animateTransform attributeName="transform" type="translate" from="0,-200" to="0,1000" dur="7s" repeatCount="indefinite"/>
-    </svg>
+            // रैंडम साइज़
+            let size = Math.random() * 30 + 30;
+            if (drop.innerText === '💧') size = Math.random() * 20 + 20; // पानी छोटा
+            if (drop.innerText.includes('❄️') || drop.innerText === '🌨️') size = Math.random() * 25 + 35; // बर्फ थोड़ी बड़ी
+            drop.style.fontSize = size + 'px';
 
-    <svg width="80" height="80" class="dice" style="left: 70%;">
-        <rect x="10" y="10" width="60" height="60" rx="15" fill="#ffff44"/>
-        <circle cx="20" cy="20" r="8" fill="#000"/>
-        <circle cx="40" cy="40" r="8" fill="#000"/>
-        <circle cx="60" cy="60" r="8" fill="#000"/>
-        <animateTransform attributeName="transform" type="translate" from="0,-120" to="0,1000" dur="9s" repeatCount="indefinite"/>
-    </svg>
+            // रैंडम स्पीड (धीमी-तेज)
+            drop.style.animationDuration = Math.random() * 6 + 5 + 's';
 
-    <style>
-        .dice {
-            position: absolute;
-            top: 0;
+            document.body.appendChild(drop);
+
+            // मेमोरी के लिए हटा दो
+            setTimeout(() => {
+                if (drop.parentNode) drop.remove();
+            }, 15000);
         }
-    </style>
+
+        // हल्की बारिश के लिए हर 200ms में (ज्यादा तेज नहीं)
+        setInterval(createDrop, 200);
+
+        // शुरू में स्क्रीन पर थोड़ा प्रभाव डाल दो
+        for (let i = 0; i < 25; i++) {
+            setTimeout(createDrop, i * 150);
+        }
+    </script>
 </body>
 </html>
