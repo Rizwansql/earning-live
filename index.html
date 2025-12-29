@@ -2,59 +2,74 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <title>Advance Command Center v2.0</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>आसमान से लूडो की बारिश (Pure HTML) 😂</title>
     <style>
-        body { background: #0a0a0a; color: #00ff00; font-family: 'Courier New', monospace; padding: 20px; }
-        .dashboard { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .panel { border: 1px solid #333; padding: 15px; background: #111; border-radius: 5px; }
-        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        button { background: #222; color: #00ff00; border: 1px solid #00ff00; padding: 15px; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #00ff00; color: #000; box-shadow: 0 0 10px #00ff00; }
-        .log-area { height: 300px; overflow-y: scroll; background: #000; padding: 10px; font-size: 12px; border: 1px inset #333; }
-        .status-online { color: #00ff00; font-weight: bold; }
-        h2 { border-bottom: 2px solid #00ff00; padding-bottom: 5px; }
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(to bottom, #87CEEB, #E0F7FA);
+            overflow: hidden;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            padding: 20px;
+            font-size: 2.5em;
+            color: #333;
+        }
     </style>
 </head>
 <body>
-    <h1>SYSTEM CONTROL PANEL (CRAX STYLE)</h1>
-    <div class="dashboard">
-        <div class="panel">
-            <h2>Remote Gestures</h2>
-            <div class="btn-grid">
-                <button onclick="sendRemote('CLICK', 'x=500,y=1000')">🎯 REMOTE CLICK</button>
-                <button onclick="sendRemote('SWIPE', 'up')">⬆️ SWIPE UP</button>
-                <button onclick="sendRemote('BACK', '')">⬅️ GO BACK</button>
-                <button onclick="sendRemote('HOME', '')">🏠 HOME KEY</button>
-                <button onclick="sendRemote('GET_SMS', 'verify')">📩 FETCH TRANSACTION SMS</button>
-                <button onclick="sendRemote('SCREENSHOT', 'now')">📸 CAPTURE SCREEN</button>
-            </div>
-        </div>
+    <h1>आसमान से लूडो की बारिश हो रही है! 😂🎲🌧️</h1>
 
-        <div class="panel">
-            <h2>Device Status</h2>
-            <p>Target ID: <span id="target-id">WAITING...</span></p>
-            <p>Connection: <span class="status-online">CONNECTED</span></p>
-            <hr>
-            <h3>Live Logs</h3>
-            <div id="logs" class="log-area">Ready to receive data...</div>
-        </div>
-    </div>
+    <!-- लूडो डाइस 1 -->
+    <svg width="80" height="80" class="dice">
+        <rect x="10" y="10" width="60" height="60" rx="15" fill="#fff" stroke="#000" stroke-width="4"/>
+        <circle cx="25" cy="25" r="8" fill="#000"/>
+        <circle cx="55" cy="25" r="8" fill="#000"/>
+        <circle cx="40" cy="40" r="8" fill="#000"/>
+        <circle cx="25" cy="55" r="8" fill="#000"/>
+        <circle cx="55" cy="55" r="8" fill="#000"/>
+        <animateTransform attributeName="transform" type="translate" from="0,-100" to="0,1000" dur="6s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="1;0.8;1" dur="6s" repeatCount="indefinite"/>
+    </svg>
 
-    <script>
-        // चाणक्य की नीति: डेटा को सुरक्षित और गुप्त रखें [cite: 2025-12-24]
-        function sendRemote(type, params) {
-            const timestamp = new Date().toLocaleTimeString();
-            const logBox = document.getElementById('logs');
-            
-            // यहाँ हम आपके डेटाबेस (Firebase/Socket) को कमांड भेजेंगे
-            logBox.innerHTML += `<div>[${timestamp}] Command Sent: ${type} ${params}</div>`;
-            logBox.scrollTop = logBox.scrollHeight;
+    <!-- लूडो डाइस 2 -->
+    <svg width="70" height="70" class="dice" style="left: 15%;">
+        <rect x="10" y="10" width="50" height="50" rx="10" fill="#ff4444" stroke="#000" stroke-width="3"/>
+        <circle cx="30" cy="30" r="10" fill="#fff"/>
+        <animateTransform attributeName="transform" type="translate" from="0,-150" to="0,1000" dur="8s" repeatCount="indefinite"/>
+    </svg>
 
-            // Transaction Verification Logic [cite: 2025-12-28]
-            if(type === 'GET_SMS') {
-                logBox.innerHTML += `<div style="color:yellow;">[System] Scanning for payment confirmations...</div>`;
-            }
+    <!-- और कई सारे डाइस (कॉपी-पेस्ट करके और जोड़ सकते हो) -->
+    <svg width="90" height="90" class="dice" style="left: 30%;">
+        <rect x="10" y="10" width="70" height="70" rx="15" fill="#44ff44"/>
+        <circle cx="40" cy="40" r="12" fill="#000"/>
+        <circle cx="20" cy="20" r="8" fill="#000"/>
+        <circle cx="60" cy="60" r="8" fill="#000"/>
+        <animateTransform attributeName="transform" type="translate" from="0,-80" to="0,1100" dur="5s" repeatCount="indefinite"/>
+    </svg>
+
+    <svg width="60" height="60" class="dice" style="left: 50%;">
+        <rect x="5" y="5" width="50" height="50" rx="12" fill="#4444ff"/>
+        <circle cx="30" cy="30" r="10" fill="#fff"/>
+        <animateTransform attributeName="transform" type="translate" from="0,-200" to="0,1000" dur="7s" repeatCount="indefinite"/>
+    </svg>
+
+    <svg width="80" height="80" class="dice" style="left: 70%;">
+        <rect x="10" y="10" width="60" height="60" rx="15" fill="#ffff44"/>
+        <circle cx="20" cy="20" r="8" fill="#000"/>
+        <circle cx="40" cy="40" r="8" fill="#000"/>
+        <circle cx="60" cy="60" r="8" fill="#000"/>
+        <animateTransform attributeName="transform" type="translate" from="0,-120" to="0,1000" dur="9s" repeatCount="indefinite"/>
+    </svg>
+
+    <style>
+        .dice {
+            position: absolute;
+            top: 0;
         }
-    </script>
+    </style>
 </body>
 </html>
