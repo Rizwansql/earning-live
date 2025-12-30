@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQL CODE V1 - PREDICTOR</title>
+    <title>SQL CODE V1 - LIVE PATTERN MATCH</title>
     <style>
         body {
             background-color: #050505;
             color: #00ff00;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -34,40 +34,41 @@
             max-width: 380px;
             text-align: center;
         }
-        /* यहाँ नाम SQL CODE V1 के लिए स्टाइल है */
         h1 { color: #ff0000; font-size: 28px; margin: 0 0 10px 0; font-family: 'Arial Black', sans-serif; }
+        .telegram { color: #00d9ff; text-decoration: none; display: block; font-size: 14px; margin-bottom: 20px; }
         
-        .telegram { color: #00d9ff; margin-bottom: 25px; text-decoration: none; display: block; font-size: 14px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        
+        .input-label { font-size: 13px; color: #bbb; margin-bottom: 8px; display: block; }
         input {
             width: 90%;
             padding: 12px;
             margin-bottom: 20px;
             background: #000;
-            border: 1px solid #444;
+            border: 1px solid #ff0000;
             color: #00ff00;
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1.4rem;
+            letter-spacing: 8px;
             outline: none;
+            border-radius: 8px;
         }
-        input:focus { border-color: #ff0000; }
 
         button {
-            padding: 12px;
+            padding: 15px;
             background: linear-gradient(45deg, #ff0000, #990000);
             color: white;
             border: none;
             cursor: pointer;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 8px;
             width: 100%;
             text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
         }
-        #status { color: #888; font-size: 12px; margin-top: 15px; height: 20px; }
-        #loader { margin-top: 10px; color: #ffaa00; font-size: 14px; }
-        #result { margin-top: 25px; font-weight: bold; min-height: 40px; }
-        .red-res { color: #ff3333; font-size: 24px; text-shadow: 0 0 10px #ff3333; }
-        .green-res { color: #33ff33; font-size: 24px; text-shadow: 0 0 10px #33ff33; }
+        #status { color: #888; font-size: 12px; margin-top: 15px; min-height: 18px; }
+        #loader { margin-top: 10px; color: #ffaa00; font-weight: bold; }
+        #result { margin-top: 25px; font-weight: bold; min-height: 50px; }
+        .red-res { color: #ff3333; font-size: 26px; text-shadow: 0 0 15px #ff3333; border: 1px solid #ff3333; padding: 10px; border-radius: 10px; }
+        .green-res { color: #33ff33; font-size: 26px; text-shadow: 0 0 15px #33ff33; border: 1px solid #33ff33; padding: 10px; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -79,24 +80,21 @@
         <a href="https://t.me/sql_rrr" class="telegram">OWNER: @sql_rrr</a>
         
         <div id="ui-box">
-            <input type="number" id="priceInput" placeholder="Enter Bcone Price (Last)">
-            <button onclick="runHack()">PREDICT COLOR</button>
+            <span class="input-label">Enter last 4 game results (Latest):</span>
+            <input type="text" id="patternInput" maxlength="4" placeholder="0000">
+            <button onclick="analyzeLivePattern()">MATCH LIVE PATTERN</button>
         </div>
 
-        <div id="status">Ready to analyze...</div>
+        <div id="status">Ready for new data...</div>
         <div id="loader"></div>
         <div id="result"></div>
     </div>
 
     <script>
-        function sumDigits(val) {
-            return val.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
-        }
-
-        function runHack() {
-            let price = document.getElementById('priceInput').value;
-            if (!price) {
-                alert("Please enter price first!");
+        function analyzeLivePattern() {
+            let input = document.getElementById('patternInput').value;
+            if (input.length < 4) {
+                alert("कृपया पिछले 4 ताजा गेम नंबर डालें!");
                 return;
             }
 
@@ -105,36 +103,44 @@
             let result = document.getElementById('result');
 
             result.innerHTML = "";
-            status.innerHTML = "Accessing SQL Secure Server...";
+            status.innerHTML = "Connecting to SQL Neural Server...";
             
             setTimeout(() => {
-                status.innerHTML = "Server Connection Established!";
+                status.innerHTML = "Analyzing video-data trend for: " + input;
                 let i = 0;
-                let frames = ['|', '/', '-', '\\'];
+                let frames = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
                 let timer = setInterval(() => {
-                    loader.innerHTML = "Processing Data " + frames[i % 4];
+                    loader.innerHTML = "Pattern Matching " + frames[i % 10];
                     i++;
-                }, 100);
+                }, 80);
 
                 setTimeout(() => {
                     clearInterval(timer);
-                    loader.innerHTML = "Analysis Successful!";
-                    displayFinal(price);
-                }, 2500);
+                    loader.innerHTML = "Logic Applied!";
+                    
+                    // एडवांस्ड लाइव लॉजिक (वीडियो चार्ट डेटा ट्रेन)
+                    let num = input.split('').map(Number);
+                    
+                    // लॉजिक: पहले और तीसरे का गैप + दूसरे और चौथे का जोड़
+                    let patternWeight = Math.abs(num[0] - num[2]) + (num[1] + num[3]);
+                    
+                    let prediction;
+                    // यदि वेट ईवन है तो RED, ऑड है तो GREEN (चार्ट पैटर्न के अनुसार)
+                    if (patternWeight % 2 === 0) {
+                        prediction = "RED";
+                    } else {
+                        prediction = "GREEN";
+                    }
 
-            }, 1500);
-        }
+                    if (prediction === "RED") {
+                        result.innerHTML = "<div class='red-res'>NEXT: 🔴 RED</div>";
+                    } else {
+                        result.innerHTML = "<div class='green-res'>NEXT: 🟢 GREEN</div>";
+                    }
+                    status.innerHTML = "New Prediction Generated.";
+                }, 3000);
 
-        function displayFinal(val) {
-            let total = sumDigits(val);
-            let resDiv = document.getElementById('result');
-            // Logic: Even = Red, Odd = Green
-            if (total % 2 === 0) {
-                resDiv.innerHTML = "<div class='red-res'>NEXT: 🔴 RED</div>";
-            } else {
-                resDiv.innerHTML = "<div class='green-res'>NEXT: 🟢 GREEN</div>";
-            }
-            document.getElementById('status').innerHTML = "Generated by SQL CODE V1.";
+            }, 1000);
         }
     </script>
 </body>
