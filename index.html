@@ -3,93 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>पानी की हल्की बारिश + बर्फ, उल्टी दिशा में! ❄️🌧️😂</title>
+    <title>MOD BY SQL - RXCE PREDICTOR</title>
     <style>
         body {
+            background-color: #050505;
+            color: #00ff00;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
             margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: linear-gradient(to bottom, #87CEEB, #E0F7FA);
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            position: relative;
         }
-
-        h1 {
+        .mod-header {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 5px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px #ff0000;
+        }
+        .container {
+            border: 1px solid #00ff00;
+            padding: 30px;
+            border-radius: 15px;
+            background: #111;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.1);
+            width: 85%;
+            max-width: 380px;
             text-align: center;
-            padding: 20px;
-            font-size: 2.5em;
-            color: #333;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-            margin: 0;
-            pointer-events: none;
-            z-index: 10;
         }
+        h1 { color: #ff0000; font-size: 28px; margin: 0 0 10px 0; font-family: serif; }
+        .telegram { color: #00d9ff; margin-bottom: 25px; text-decoration: none; display: block; font-size: 14px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .telegram:hover { color: #fff; }
+        
+        input {
+            width: 90%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background: #000;
+            border: 1px solid #444;
+            color: #00ff00;
+            text-align: center;
+            font-size: 1.1rem;
+            outline: none;
+        }
+        input:focus { border-color: #ff0000; }
 
-        .drop {
-            position: absolute;
-            animation: rise linear infinite;
-            pointer-events: none;
-            user-select: none;
-            bottom: -100px;
+        button {
+            padding: 12px;
+            background: linear-gradient(45deg, #ff0000, #990000);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px;
+            width: 100%;
+            text-transform: uppercase;
         }
-
-        @keyframes rise {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% { opacity: 1; }
-            100% {
-                transform: translateY(-120vh) rotate(720deg);
-                opacity: 0.4;
-            }
-        }
+        #status { color: #888; font-size: 12px; margin-top: 15px; height: 20px; }
+        #loader { margin-top: 10px; color: #ffaa00; font-size: 14px; }
+        #result { margin-top: 25px; font-weight: bold; min-height: 40px; }
+        .red-res { color: #ff3333; font-size: 24px; text-shadow: 0 0 10px #ff3333; }
+        .green-res { color: #33ff33; font-size: 24px; text-shadow: 0 0 10px #33ff33; }
     </style>
 </head>
 <body>
-    <h1>पानी की हल्की बारिश + बर्फ उल्टी दिशा में! ❄️🌧️🎲</h1>
+
+    <div class="mod-header">MOD BY SQL</div>
+    
+    <div class="container">
+        <h1>RXCE V2.1</h1>
+        <a href="https://t.me/sql_rrr" class="telegram">OWNER: @sql_rrr</a>
+        
+        <div id="ui-box">
+            <input type="number" id="priceInput" placeholder="Enter Bcone Price (Last)">
+            <button onclick="runHack()">PREDICT COLOR</button>
+        </div>
+
+        <div id="status">Ready to analyze...</div>
+        <div id="loader"></div>
+        <div id="result"></div>
+    </div>
 
     <script>
-        // पानी की बूंदें, बर्फ, और थोड़े लूडो पासे
-        const items = [
-            '💧', '💧', '💧', '💧', '💧', // पानी की बूंदें ज्यादा
-            '❄️', '❄️', '❄️', '❄️',       // बर्फ
-            '🌨️', '🌨️',                   // स्नो क्लाउड
-            '🎲', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'  // लूडो पासे कम
-        ];
-
-        function createDrop() {
-            const drop = document.createElement('div');
-            drop.classList.add('drop');
-            drop.innerText = items[Math.floor(Math.random() * items.length)];
-
-            // रैंडम पोजीशन
-            drop.style.left = Math.random() * 100 + 'vw';
-
-            // रैंडम साइज़
-            let size = Math.random() * 30 + 30;
-            if (drop.innerText === '💧') size = Math.random() * 20 + 20; // पानी छोटा
-            if (drop.innerText.includes('❄️') || drop.innerText === '🌨️') size = Math.random() * 25 + 35; // बर्फ थोड़ी बड़ी
-            drop.style.fontSize = size + 'px';
-
-            // रैंडम स्पीड (धीमी-तेज)
-            drop.style.animationDuration = Math.random() * 6 + 5 + 's';
-
-            document.body.appendChild(drop);
-
-            // मेमोरी के लिए हटा दो
-            setTimeout(() => {
-                if (drop.parentNode) drop.remove();
-            }, 15000);
+        function sumDigits(val) {
+            return val.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
         }
 
-        // हल्की बारिश के लिए हर 200ms में (ज्यादा तेज नहीं)
-        setInterval(createDrop, 200);
+        function runHack() {
+            let price = document.getElementById('priceInput').value;
+            if (!price) {
+                alert("Please enter price first!");
+                return;
+            }
 
-        // शुरू में स्क्रीन पर थोड़ा प्रभाव डाल दो
-        for (let i = 0; i < 25; i++) {
-            setTimeout(createDrop, i * 150);
+            let status = document.getElementById('status');
+            let loader = document.getElementById('loader');
+            let result = document.getElementById('result');
+
+            result.innerHTML = "";
+            status.innerHTML = "Accessing Bcone API...";
+            
+            setTimeout(() => {
+                status.innerHTML = "Server Hacked Successfully!";
+                let i = 0;
+                let frames = ['|', '/', '-', '\\'];
+                let timer = setInterval(() => {
+                    loader.innerHTML = "Decoding Pattern " + frames[i % 4];
+                    i++;
+                }, 100);
+
+                setTimeout(() => {
+                    clearInterval(timer);
+                    loader.innerHTML = "Pattern Decoded!";
+                    displayFinal(price);
+                }, 2500);
+
+            }, 1500);
+        }
+
+        function displayFinal(val) {
+            let total = sumDigits(val);
+            let resDiv = document.getElementById('result');
+            // Logic: Even = Red, Odd = Green
+            if (total % 2 === 0) {
+                resDiv.innerHTML = "<div class='red-res'>NEXT: 🔴 RED</div>";
+            } else {
+                resDiv.innerHTML = "<div class='green-res'>NEXT: 🟢 GREEN</div>";
+            }
+            document.getElementById('status').innerHTML = "Prediction Complete.";
         }
     </script>
 </body>
